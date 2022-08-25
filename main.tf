@@ -3,7 +3,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.0"
-      profile = "default"
+      
     }
   }
 }
@@ -11,6 +11,7 @@ terraform {
 # Configure the AWS Provider
 provider "aws" {
   region = "us-east-1"
+  profile = "default"
 }
 
 # Create a VPC
