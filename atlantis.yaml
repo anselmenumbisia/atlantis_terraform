@@ -23,7 +23,7 @@ workflows:
       steps:
       - init
       - run: terraform workspace select $WORKSPACE || terraform workspace new $WORKSPACE
-      - run: terraform plan -no-color -out $PLANFILE | terrahelp mask
+      - run: terraform plan -no-color -out $PLANFILE
       - plan:
           extra_args: ["-var-file", "prod.tfvars"]
   
@@ -38,6 +38,6 @@ workflows:
       steps:
       - init
       - run: terraform workspace select $WORKSPACE || terraform workspace new $WORKSPACE
-      - run: terraform plan -no-color -out $PLANFILE | terrahelp mask
+      - run: terraform plan -no-color -out $PLANFILE
       - plan:
           extra_args: ["-var-file", "stage.tfvars"]
