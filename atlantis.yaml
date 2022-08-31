@@ -1,0 +1,38 @@
+version: 3
+projects:
+
+- name: production
+  dir: .
+  autoplan:
+    when_modified: ["*.tf*"]
+  #workspace: prod
+  workflow: production
+  apply_requirements: [mergeable, approved]
+
+- name: staging
+  dir: .
+  autoplan:
+    when_modified: ["*.tf*"]
+  #workspace: staging
+  workflow: staging
+  apply_requirements: [mergeable]
+
+workflows:
+  production:
+    plan:
+      steps:
+      - init
+      - plan:
+          extra_args: ["-var-file", "prod.tfvars"]
+  # apply:
+  #     steps:
+  #     - init
+  #     - plan:
+  #         extra_args: ["-var-file", "prod.tfvars"]
+      
+  staging:
+    plan:
+      steps:
+      - init
+      - plan:
+          extra_args: ["-var-file", "stage.tfvars"]
